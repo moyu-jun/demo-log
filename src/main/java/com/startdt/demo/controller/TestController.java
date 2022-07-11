@@ -1,5 +1,7 @@
 package com.startdt.demo.controller;
 
+import com.startdt.demo.service.TestService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController("test")
+@RequiredArgsConstructor
 public class TestController {
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+
+    private final TestService testService;
 
     @GetMapping("/log")
     public String testLog() {
@@ -31,6 +36,8 @@ public class TestController {
         if (logger.isDebugEnabled()) {
             logger.debug("logger debug.");
         }
+
+        testService.testThreadLog();
         return "ok";
     }
 }
